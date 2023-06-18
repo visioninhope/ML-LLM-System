@@ -20,3 +20,19 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+# urls.py
+
+from django.urls import path
+from EduOptima.views import register_user, user_login, password_reset
+
+urlpatterns = [
+    # User registration
+    path('api/register/', register_user, name='register'),
+
+    # User login
+    path('api/login/', user_login, name='login'),
+
+    # Password reset
+    path('api/password-reset/', password_reset, name='password_reset'),
+]
