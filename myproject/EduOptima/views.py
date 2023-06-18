@@ -1,11 +1,10 @@
-from django.shortcuts import render
-
-# Create your views here.
-
-# views.py
-
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.tokens import default_token_generator
+from django.core.mail import send_mail
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -19,13 +18,6 @@ def register_user(request):
     user = User.objects.create_user(username=username, password=password, email=email)
 
     return Response('User registered successfully!')
-
-# views.py
-
-from django.contrib.auth import authenticate, login
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
 
 @csrf_exempt
 @api_view(['POST'])
@@ -42,14 +34,6 @@ def user_login(request):
         return Response('Login successful!')
     else:
         return Response('Invalid credentials!')
-
-# views.py
-
-from django.contrib.auth.forms import PasswordResetForm
-from django.contrib.auth.tokens import default_token_generator
-from django.core.mail import send_mail
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
 
 @api_view(['POST'])
 def password_reset(request):
@@ -74,4 +58,3 @@ def password_reset(request):
         return Response('Password reset email sent!')
     else:
         return Response('Invalid email!')
-
