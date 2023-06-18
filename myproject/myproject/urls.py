@@ -14,25 +14,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# urls.py
+
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
-
-# urls.py
-
-from django.urls import path
-from EduOptima.views import register_user, user_login, password_reset
-
-urlpatterns = [
-    # User registration
-    path('api/register/', register_user, name='register'),
-
-    # User login
-    path('api/login/', user_login, name='login'),
-
-    # Password reset
-    path('api/password-reset/', password_reset, name='password_reset'),
+    path('', include('EduOptima.urls')),  # Add this line to include the urls.py file of the EduOptima app
 ]
